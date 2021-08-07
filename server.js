@@ -7,6 +7,8 @@ const validUrl = require('valid-url');
 const nanoid = require('nanoid');
 const app = express();
 
+const { grabWikiContents } = require('./grab.js');
+
 
 /** Install and set up Mongoose */
 mongoose.connect(process.env['MONGO_URI'], {
@@ -39,53 +41,58 @@ app.get('/', function(req, res) {
 // Defining schema for database
 const urlSchema = new mongoose.Schema({
   original_url: String,
-  short_url: String
+  wikified_url: String
 });
 
 const URL = mongoose.model("URL", urlSchema);
 
-// Shortening a new URL
-app.post('/wikiurl', (req, res) => {
+
+// Wikifying a new URL
+app.post('/wikiurl', async (req, res) => {
   const url = req.body.url;
-  const urlCode = nanoid();
+  //const urlCode = nanoid();
+  // Not worrying about duplicate links atm
 
   console.log(url);
+  grabWikiContents().then(wikiURL => {
 
-  if (!validUrl.isWebUri(url)) {
-    res.json({
-      error: 'invalid url'
-    });
-  } else {
-    URL.findOne({ original_url: url }, (error, urlFound) => {
-      if (error) {
-        console.log(error);
-      } else {
-        if (!urlFound) { // case url is not in database, add it
-          newUrl = new URL({
-            original_url: url,
-            short_url: urlCode
-          })
-          newUrl.save();
-          res.json({
-            original_url: newUrl.original_url,
-            short_url: newUrl.short_url
-          });
-        } else { // case url in database, return json
-          res.json({
-            original_url: urlFound.original_url,
-            short_url: urlFound.short_url
-          });
+    console.log(wikiURL);
+
+    if (!validUrl.isWebUri(url)) {
+      res.json({
+        error: 'invalid url'
+      });
+    } else {
+      URL.findOne({ original_url: url }, (error, urlFound) => {
+        if (error) {
+          console.log(error);
+        } else {
+          if (!urlFound) { // case url is not in database, add it
+            newUrl = new URL({
+              original_url: url,
+              wikified_url: wikiURL
+            })
+            newUrl.save();
+            res.json({
+              original_url: newUrl.original_url,
+              wikified_url: newUrl.wikified_url
+            });
+          } else { // case url in database, return json
+            res.json({
+              original_url: urlFound.original_url,
+              wikified_url: urlFound.wikified_url
+            });
+          }
         }
-      }
-    });
-
-  }
-})
+      });
+    }
+  });
+});
 
 
 // convert shorturl to original URL 
 app.get('/wikiurl/:wikified?', (req, res) => {
-  URL.findOne({ wikified: req.params.short_url }, (error, urlFound) => {
+  URL.findOne({ wikified_url: req.params.wikified }, (error, urlFound) => {
     if (error) {
       console.log(error);
     } else {
