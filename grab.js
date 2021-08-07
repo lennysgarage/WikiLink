@@ -17,14 +17,16 @@ function grabWikiContents() {
             let key;
             for(key in commits.query.pages) {
                 if(commits.query.pages.hasOwnProperty(key)) {
-                    return JSON.stringify(commits.query.pages[key].extract).substring(0, 200).replaceAll(" ", "-");
+                    return JSON.stringify(commits.query.pages[key].extract).substring(1, 201).replaceAll(" ", "-");
                 }
             }
         });
 }
 
-async function main() {
-    graby().then(content => console.log(content));
-}
 
-main().catch(console.error);
+module.exports.grabWikiContents = graby;
+// async function main() {
+//     graby().then(content => console.log(content));
+// }
+
+// main().catch(console.error);
