@@ -1,12 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const validUrl = require('valid-url');
-const nanoid = require('nanoid');
-const app = express();
-
 const { grabWikiContents } = require('./grab.js');
 
 
@@ -26,11 +22,14 @@ db.once('open', () => {
 // Basic Configuration
 const port = process.env.PORT || 3000;
 
+// Start app
+const app = express();
+
 // For req.body
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(cors());
-
 app.use('/public', express.static(`${process.cwd()}/public`));
 
 app.get('/', function(req, res) {
