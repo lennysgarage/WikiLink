@@ -19,7 +19,7 @@ Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];}
 
 async function graby() {
     let contents = "";
-    while(contents.length < 3) {
+    while(contents.length < 300) {
         contents = await grabWikiContents();
     }
     return contents;
@@ -35,7 +35,7 @@ function grabWikiContents() {
             for(key in commits.query.pages) {
                 if(commits.query.pages.hasOwnProperty(key)) {
                     let content = JSON.stringify(commits.query.pages[key].extract);
-                    return content.substring(1,content.length-1).replace(/(\s+|["`\^<>{|}]+)/g, "-");
+                    return content.substring(1,content.length-1).replace(/(\\n)|(\s+|["`\^<>{|}]+)/g, "-");
                     // We substring to remove quotation marks at beginning and end
                 }
             }
@@ -45,7 +45,7 @@ function grabWikiContents() {
 
 
 module.exports.grabWikiContents = graby;
-//Basic testing code 
+// Basic testing code 
 // async function main() {
 //      graby().then(content => console.log(content));
 // }
