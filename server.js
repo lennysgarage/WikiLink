@@ -19,8 +19,15 @@ db.once('open', () => {
   console.log("MongoDB database connected successfully");
 });
 
-// Basic Configuration
-const port = process.env.PORT || 3000;
+
+// Defining schema for database
+const urlSchema = new mongoose.Schema({
+  original_url: String,
+  wikified_url: String
+});
+
+const URL = mongoose.model("URL", urlSchema);
+
 
 // Start app
 const app = express();
@@ -35,15 +42,6 @@ app.use('/public', express.static(`${process.cwd()}/public`));
 app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
-
-
-// Defining schema for database
-const urlSchema = new mongoose.Schema({
-  original_url: String,
-  wikified_url: String
-});
-
-const URL = mongoose.model("URL", urlSchema);
 
 
 // Wikifying a new URL
@@ -104,6 +102,7 @@ app.get('/wikiurl/:wikified?', (req, res) => {
   });
 });
 
+const port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
