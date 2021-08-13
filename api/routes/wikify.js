@@ -1,19 +1,18 @@
 const express = require('express');
+const validUrl = require('valid-url');
 const router = express.Router();
 
+
 const URL = require('../model/url.js');
+const { grabWikiContents } = require('../grab.js');
 
 /* Wikifying a new URL */
-app.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     const url = req.body.url;
     //const urlCode = nanoid();
     // Not worrying about duplicate links atm
   
-    console.log(url);
     grabWikiContents().then(wikiURL => {
-  
-      console.log(wikiURL);
-  
       if (!validUrl.isWebUri(url)) {
         res.json({
           error: 'invalid url'
