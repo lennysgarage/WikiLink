@@ -1,0 +1,15 @@
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+.WikiLink {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
+p {
+  font: 36px;
+}
