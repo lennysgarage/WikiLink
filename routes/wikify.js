@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 const URL = require('../model/url.js');
-const { grabWikiContents } = require('../grab.js');
+const { grabWikiContents } = require('../utils/grab.js');
 
 /* Wikifying a new URL */
 router.post('/', async (req, res) => {
