@@ -6,10 +6,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
-var connection = require('./mongo_connection.js');
+var connection = require('./utils/mongo_connection.js');
 
 var indexRouter = require('./routes/index.js');
-var usersRouter = require('./routes/users.js');
 var wikifyRouter = require('./routes/wikify.js');
 var wikifiedRouter = require('./routes/wikified.js');
 
