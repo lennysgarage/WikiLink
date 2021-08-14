@@ -35,7 +35,7 @@ function grabWikiContents() {
             for(key in commits.query.pages) {
                 if(commits.query.pages.hasOwnProperty(key)) {
                     let content = JSON.stringify(commits.query.pages[key].extract);
-                    return content.substring(1,content.length-1).replace(/(\\n)|(\s+|["`\^<>{|}]+)/g, "-");
+                    return content.substring(1,content.length-1).replace(/(\\n)+|(\s+)|(\W+)/g, "-");
                     // We substring to remove quotation marks at beginning and end
                 }
             }
