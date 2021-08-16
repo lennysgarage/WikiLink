@@ -8,7 +8,6 @@ var cors = require('cors');
 
 var connection = require('./utils/mongo_connection.js');
 
-var indexRouter = require('./routes/index.js');
 var wikifyRouter = require('./routes/wikify.js');
 var wikifiedRouter = require('./routes/wikified.js');
 
@@ -26,7 +25,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/wikiurl', wikifyRouter);
 app.use('/wikiurl/:wikified?', wikifiedRouter);
 
