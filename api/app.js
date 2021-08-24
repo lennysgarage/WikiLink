@@ -25,8 +25,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/wikiurl', wikifyRouter);
-app.use('/wikiurl/:wikified?', wikifiedRouter);
+app.use('/api', wikifyRouter);
+app.use('/api/:wikified?', wikifiedRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
