@@ -11,7 +11,7 @@ function keepTheme() {
       setTheme('theme-light')
     }
   } else {
-    setTheme('theme-light')
+    setTheme('theme-dark')
   }
 }
 

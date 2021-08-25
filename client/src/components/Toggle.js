@@ -3,7 +3,7 @@ import '../styles/toggle.css';
 import { setTheme } from '../utils/themes';
 
 function Toggle() {
-    const [togClass, setTogClass] = useState('light');
+    const [togClass, setTogClass] = useState('dark');
     let theme = localStorage.getItem('theme');
 
     const handleOnClick = () => {
