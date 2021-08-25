@@ -7,7 +7,8 @@
     "npm": "7.*"
   },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "publishToHeroku": "cd ../ && git subtree push --prefix api heroku main || true"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
