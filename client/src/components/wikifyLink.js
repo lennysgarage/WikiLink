@@ -12,6 +12,7 @@ class Wikify extends React.Component {
   
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.urlToPost = process.env.NODE_ENV === 'development' ? 'http://localhost:9000/api/' : 'https://wikilink-backend.herokuapp.com/api/';
     }
   
     handleChange(event) {
@@ -21,11 +22,10 @@ class Wikify extends React.Component {
     handleSubmit(event) {
       alert('A url was submitted ' + this.state.original_url);
       event.preventDefault();
-      axios.post('http://localhost:9000/api/', {
+      axios.post(this.urlToPost, {
         url: this.state.original_url
       })
       .then(response => {
-        console.log(response.data);
         this.setState({ 
           wikified_url: response.data.wikified_url
         })
@@ -40,9 +40,9 @@ class Wikify extends React.Component {
               <label for="input1">URL</label>
             <input type="submit" id="url-submit" value="Wikify"/>
           </form>
-          {this.state.wikified_url && <button onClick={() => {navigator.clipboard.writeText("http://localhost:9000/api/"+this.state.wikified_url)}}
+          {this.state.wikified_url && <button onClick={() => {navigator.clipboard.writeText(this.urlToPost+this.state.wikified_url)}}
 >Copy</button>} 
-          {this.state.wikified_url && <p>http://localhost:9000/api/{this.state.wikified_url}</p>} 
+          {this.state.wikified_url && <p>{this.urlToPost}{this.state.wikified_url}</p>} 
         </div>
       )
     }
