@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import validUrl from 'valid-url';
 
 
 class Wikify extends React.Component {
@@ -20,6 +21,10 @@ class Wikify extends React.Component {
     }
   
     handleSubmit(event) {
+      if (!validUrl.isWebUri(this.state.original_url)) {
+        alert('Invalid url');
+        return;
+      }
       alert('A url was submitted ' + this.state.original_url);
       event.preventDefault();
       axios.post(this.urlToPost, {
