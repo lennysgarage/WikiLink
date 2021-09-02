@@ -9,7 +9,7 @@
 #tsparticles {
   height: 100%;
   width: 100%;
-  position: fixed;
+  position: absolute;
 }
 
 h1 {
@@ -26,7 +26,7 @@ h2 {
 html, #root {
   background-color: var(--dark-background);
   color: var(--dark-text);
-  position: absolute;
+  position: relative;
   height: 100%;
   width: 100%;
 }
@@ -39,77 +39,18 @@ body{
   height: 100vh;
   font-family: Montserrat;
 }
-  
-input[type="text"]{
-  position: relative;
-  display: block; 
-  margin-bottom: 0.2em; 
-  width: 100%;
-  height: 48px;
-  box-sizing: border-box;
-  outline: none;
-  border: 1px solid lightgray;
-  border-radius: 3px;
-  padding: 20px 20px 20px 100px;
-  transition: all 0.1s ease-out;
-  font-size: 20px;
-}
-
-input[type="text"] + label{
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  height: 48px;
-  line-height: 48px;
-  color: white;
-  border-radius: 3px 0 0 3px;
-  padding: 0 20px;
-  background: #E03616;
-  transform: translateZ(0) translateX(0);
-  transition: all 0.3s ease-in;
-  transition-delay: 0.2s;
-}
-
-input[type="text"]:focus + label{
-  transform: translateY(-120%) translateX(0%);
-  border-radius: 3px;
-  transition: all 0.1s ease-out;
-}
-
-input[type="text"]:focus{
-  padding: 10px;
-  transition: all 0.3s ease-out;
-  transition-delay: 0.2s;
-}
-
-input[type="submit"] {
-  position: absolute;
-  left: 30%;
-  height: 40px;
-  width: 40%;
-  background-color: var(--dark-background);
-  color: var(--light-text);
-  font: 32px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-input[type="submit"]:hover {
-  -webkit-transition:border-color 0.3s ease-in-out;
-	-moz-transition:border-color 0.3s ease-in-out;
-	transition:border-color 0.3s ease-in-out;
-  background-color: var(--sep);
-  border-color: var(--button-border);
-  border-radius: 3px;
-  transition: all 150ms ease-in;
-  color: var(--dark-text);
-}
 
 .WikifyInput {
-  margin: 0 auto;
-  max-width: 900px;
   position: relative;
-  margin-top: 50px;
-  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p.card-text {
+  padding-top: 0px;
+  font: 16px;
 }
 
 p {
@@ -118,26 +59,6 @@ p {
   color: var(--light-text);
 }
 
-button {
-  position: absolute;
-  left: 30%;
-  height: 40px;
-  width: 40%;
-  background-color: var(--dark-background);
-  color: var(--light-text);
-  font: 32px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-button:hover {
-  -webkit-transition:border-color 0.3s ease-in-out;
-	-moz-transition:border-color 0.3s ease-in-out;
-	transition:border-color 0.3s ease-in-out;
-  background-color: var(--sep);
-  border-color: var(--button-border);
-  border-radius: 3px;
-  transition: all 80ms ease-in;
-  color: var(--dark-text);
-}
 
 .theme-light {
   --dark-text: #5E4B56;

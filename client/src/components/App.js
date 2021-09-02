@@ -7,6 +7,7 @@ import Wikify from './wikifyLink';
 import Particles from 'react-tsparticles';
 import particleOptions from '../utils/particles.json';
 
+
 function App() {
   useEffect(() => {
     keepTheme();
@@ -15,10 +16,10 @@ function App() {
 
   return (
     <div className="App">
-      <Particles options={particleOptions} />
-      <Header />
-      <Toggle />
-      <Wikify />
+        <Particles options={particleOptions} />
+        <Header />
+        <Toggle />
+        <Wikify />
     </div>
   )
 }
