@@ -17,12 +17,21 @@ url = url + "?origin=*";
 Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
 
 
-async function graby() {
+async function WikiContents() {
     let contents = "";
+    let pageid = "";
+    let title = "";
     while(contents.length < 300) {
-        contents = await grabWikiContents();
+        let content = await grabWikiContents();
+        contents = content.content;
+        pageid = content.pageid;
+        title = content.title;
     }
-    return contents;
+    return {
+        content: contents,
+        pageid: pageid,
+        title: title,
+    };
 }
 
 
@@ -35,7 +44,11 @@ function grabWikiContents() {
             for(key in commits.query.pages) {
                 if(commits.query.pages.hasOwnProperty(key)) {
                     let content = JSON.stringify(commits.query.pages[key].extract);
-                    return content.substring(1,content.length-1).replace(/(\\n)+|(\s+)|(\W+)/g, "-");
+                    return {
+                        content: content.substring(1,content.length-1).replace(/(\\n)+|(\s+)|(\W+)/g, "-"),
+                        pageid: key,
+                        title: commits.query.pages[key].title,
+                    };
                     // We substring to remove quotation marks at beginning and end
                 }
             }
@@ -44,7 +57,7 @@ function grabWikiContents() {
 }
 
 
-module.exports.grabWikiContents = graby;
+module.exports.WikiContents = WikiContents;
 // Basic testing code 
 // async function main() {
 //      graby().then(content => console.log(content));
