@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import validUrl from 'valid-url';
 import Form from 'react-bootstrap/Form';
@@ -21,13 +20,13 @@ class Wikify extends React.Component {
       this.urlToPost = process.env.NODE_ENV === 'development' ? 'http://localhost:9000/' : 'https://api.wikifylink.me/';
     }
 
-
+    /* Update value of url inputted */
     handleChange(event) {
       this.setState({ original_url: event.target.value }); 
     }
 
-  
-    handleSubmit(event) {
+    /* Here we are submitting the link to wikify */
+    async handleSubmit(event) {
       event.preventDefault();
       if (!validUrl.isWebUri(this.state.original_url)) {
         alert('Invalid url');
@@ -36,16 +35,18 @@ class Wikify extends React.Component {
 
       this.setState({ isLoading: true });
 
-      axios.post(this.urlToPost, {
-        url: this.state.original_url
-      })
-      .then(response => {
-        this.setState({ 
-          wikified_url: response.data.wikified_url,
-          pageid: response.data.pageid,
-          title: response.data.title,
-          isLoading: false
-        });
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: this.state.original_url }),
+      };
+      const response = await fetch(this.urlToPost, requestOptions);
+      const data = await response.json();
+      this.setState({
+        wikified_url: data.wikified_url,
+        pageid: data.pageid,
+        title: data.title,
+        isLoading: false
       });
     }
   
@@ -74,11 +75,11 @@ class Wikify extends React.Component {
             </div>
           </Form>
           <div className="d-grid gap-1">
+            <br/>
             {this.state.wikified_url && <Button variant="secondary" size="lg" onClick={() => {navigator.clipboard.writeText(this.urlToPost+this.state.wikified_url)}}
   >Copy Wikified Link!</Button>} 
           </div>
-          {this.state.wikified_url && <p>{this.urlToPost}{this.state.wikified_url}</p>}
-          {this.state.wikified_url && <WikiCard title={this.state.title} content={this.state.wikified_url.substring(0,200).replaceAll('-',' ')} link={`https://en.wikipedia.org/w/index.php?curid=${this.state.pageid}`} />} 
+          {this.state.wikified_url && <WikiCard title={this.state.title} content={this.urlToPost+this.state.wikified_url} link={`https://en.wikipedia.org/w/index.php?curid=${this.state.pageid}`} />} 
         </div>
       )
     }

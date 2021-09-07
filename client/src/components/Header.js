@@ -6,6 +6,7 @@ function Header() {
         <header>
             <div className="header_text">
                 <h1 className="header_title">WikiLink</h1>
+                <br/>
                 <h2 className="header_desc">Paste in any URL to "wikify" it</h2>
             </div>
         </header>
