@@ -21,33 +21,33 @@ router.post('/', async (req, res) => {
         if (error) {
           console.error(error);
         } else {
-          if (!urlFound) { // case url is not in database, add it
-            let content = await WikiContents();
+            let content;
+            try {
+              content = await WikiContents();
+            } catch (err) {
+              console.error('Error on requesting content', err);
+            }
+
             let contents = content.content;
             let pageid = content.pageid;
             let title = content.title;
             // Want to find the wiki url
-            newURL = new URL({
-              original_url: url,
-              wikified_url: contents,
-              title: title,
-              pageid: pageid,
-            });
-            newURL.save();
-            res.json({
-              original_url: newURL.original_url,
-              wikified_url: newURL.wikified_url,
-              title: newURL.title,
-              pageid:  newURL.pageid
-              
-            });
-          } else { // case url is in database, return json
-            res.json({
-              original_url: urlFound.original_url,
-              wikified_url: urlFound.wikified_url,
-              title: urlFound.title,
-              pageid: urlFound.pageid
-            });
+            try {
+              newURL = new URL({
+                original_url: url,
+                wikified_url: contents,
+                title: title,
+                pageid: pageid,
+              });
+              newURL.save(); 
+              res.json({
+                original_url: newURL.original_url,
+                wikified_url: newURL.wikified_url,
+                title: newURL.title,
+                pageid:  newURL.pageid
+              });
+          } catch (err) {
+            console.error('Error on saving to database', err);
           }
         }
       });
