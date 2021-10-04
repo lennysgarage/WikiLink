@@ -28,23 +28,22 @@ router.post('/', async (req, res) => {
               console.error('Error on requesting content', err);
             }
 
-            let contents = content.content;
+            let wikified_contents = content.content;
             let pageid = content.pageid;
             let title = content.title;
             // Want to find the wiki url
             try {
+              // Don't need to save title & pageid in db
               newURL = new URL({
                 original_url: url,
-                wikified_url: contents,
-                title: title,
-                pageid: pageid,
+                wikified_url: wikified_contents,
               });
               newURL.save(); 
               res.json({
-                original_url: newURL.original_url,
-                wikified_url: newURL.wikified_url,
-                title: newURL.title,
-                pageid:  newURL.pageid
+                original_url: url,
+                wikified_url: wikified_contents,
+                title: title,
+                pageid:  pageid
               });
           } catch (err) {
             console.error('Error on saving to database', err);
