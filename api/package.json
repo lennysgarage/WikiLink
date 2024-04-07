@@ -1,10 +1,10 @@
 {
   "name": "api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "^16.6.2",
-    "npm": "7.*"
+    "node": "^18.14.2",
+    "npm": "8.*"
   },
   "scripts": {
     "start": "node ./bin/www",
