@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 let url = "https://en.wikipedia.org/w/api.php";
 
 const params = {
