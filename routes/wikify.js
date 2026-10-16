@@ -23,9 +23,15 @@ router.post('/', async (req, res) => {
           console.error('Error on requesting content', err);
         }
 
-        let wikified_contents = content.content;
-        let pageid = content.pageid;
-        let title = content.title;
+        let wikified_contents = content && content.content;
+        let pageid = content && content.pageid;
+        let title = content && content.title;
+
+        if (!wikified_contents) {
+          return res.status(502).json({
+            error: 'failed to fetch wikipedia content'
+          });
+        }
 
         try {
           const newURL = new URL({
@@ -41,9 +47,15 @@ router.post('/', async (req, res) => {
           });
         } catch (err) {
           console.error('Error on saving to database', err);
+          res.status(500).json({
+            error: 'failed to save url'
+          });
         }
       } catch (error) {
         console.error(error);
+        res.status(500).json({
+          error: 'internal server error'
+        });
       }
     }
 });
