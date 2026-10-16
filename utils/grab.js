@@ -49,11 +49,24 @@ async function grabWikiContents() {
 
     let response;
     try {
-        response = await fetch(url);
+        response = await fetch(url, {
+            headers: {
+                // Wikimedia blocks API requests without a descriptive User-Agent,
+                // returning an HTML error page instead of JSON.
+                'User-Agent': 'WikiLink/1.0 (https://github.com/lennysgarage/WikiLink)',
+                'Accept': 'application/json',
+            },
+        });
     } catch(err) {
         console.error('Error on fetching url', err);
+        throw err;
     }
     
+    if (!response.ok) {
+        console.error('Wikipedia API returned status', response.status);
+        throw new Error(`Wikipedia API status ${response.status}`);
+    }
+
     let data;
     try {
         data = await response.json();
