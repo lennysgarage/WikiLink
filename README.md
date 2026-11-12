@@ -1,8 +1,8 @@
 # [WikiLink](https://tender-shaw-eff2a3.netlify.app/)
 
-This project is the opposite of a url "shortener".
+This project is the opposite of a URL "shortener".
 
-We take in a url and spit out a url (usually longer) created using a random wikipedia article's contents.
+We take in a URL and spit out a URL (usually longer) created using a random wikipedia article's contents.
 
 The project is powered by a javascript frontend and backend, with MongoDB as the choice to store all the original and 'wikified' urls.
 
@@ -10,7 +10,7 @@ The project is powered by a javascript frontend and backend, with MongoDB as the
 
 Original URL: https://github.com/lennysgarage/WikiLink
 
-Wikified URL: https://wikilink-backend.herokuapp.com/Michel-Ange-Houasse--Paris-1680--Arpajon-1730-was-a-French-painter-most-of-whose-career-was-spent-at-the-court-of-Philip-V-of-Spain-who-summoned-him-to-the-court-in-Madrid-in-1715-whilst-he-was-still-Philip-of-Anjou-Michel-Ange-had-already-trained-in-the-studio-of-his-father-Ren-Antoine-Houasse-Michel-Ange-produced-many-portraits-of-the-Spanish-royal-family-including-ones-of-the-future-king-Louis-I-He-introduced-Spain-to-mythological-and-rural-scenes-he-had-learned-from-Flemish-Baroque-art-His-taste-for-pastoral-and-bucolic-genre-scenes-resulted-in-paintings-such-as-Blind-man-s-buff--in-Spanish-La-gallina-ciega-clearly-influenced-by-Watteau-and-itself-a-clear-influence-on-Goya-s-oil-on-linen-cartoon-of-the-same-name-In-his-later-years-he-came-into-friction-over-works-for-the-royal-court-with-his-fellow-French-artist-Jean-Ranc-
+Wikified URL: https://wikilink-backend.herokuapp.com/Peace-Arch-Entertainment--PAE-formerly-known-as-Medco-from-1981-until-1985-and-Vidatron-Entertainment-from-1985-until-1999-stylized-as-PEACE-ARCH-was-a-Canadian-motion-picture-and-television-production-company-based-in-Toronto-Ontario-Canada-with-offices-in-Los-Angeles-and-Vancouver-The-company-produced-and-acquired-feature-films-and-television-programs-for-worldwide-distribution-It-got-filed-for-bankruptcy-and-disestablished-in-2013-
 
 </br>
 
