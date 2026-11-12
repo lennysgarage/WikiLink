@@ -17,7 +17,7 @@ class Wikify extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.urlToPost = process.env.NODE_ENV === 'development' ? 'http://localhost:9000/' : 'https://wikilink-backend.herokuapp.com/';
+    this.urlToPost = process.env.NODE_ENV === 'development' ? 'http://localhost:9000/' : 'https://wikilink.lennysgarage.com/';
   }
 
   /* Update value of url inputted */
