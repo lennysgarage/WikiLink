@@ -49,7 +49,13 @@ async function grabWikiContents() {
 
     let response;
     try {
-        response = await fetch(url);
+        // Wikimedia requires a descriptive User-Agent; requests without
+        // one are rate-limited (HTTP 429, HTML error page)
+        response = await fetch(url, {
+            headers: {
+                "User-Agent": "WikiLink/1.0 (https://github.com/lennysgarage/WikiLink; lennysgarage1@gmail.com)",
+            },
+        });
     } catch(err) {
         console.error('Error on fetching url', err);
     }
